@@ -2,7 +2,7 @@ import Searchform from "../components/Searchform";
 import StartupCard from "../components/StartupCard";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
-import { auth } from "@/auth";
+
 
 export const revalidate = 60;
 
