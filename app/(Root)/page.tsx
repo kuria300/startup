@@ -23,9 +23,7 @@ export default async function Home({searchParams} : {searchParams: Promise<{quer
    const params= {search: query || null}
   const {data: posts}= await sanityFetch( {query: STARTUPS_QUERY, params});
 
-  const session = await auth();
 
-  //console.log(session?.id);
   
   return (
     <>

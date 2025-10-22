@@ -4,8 +4,13 @@ import { BadgePlus, LogOut } from 'lucide-react';
 import { signIn, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import Image from 'next/image';
+import type { Session } from 'next-auth';
 
-const NavbarActions = ({ session }: {session: any}) => {
+interface NavbarActionsProps {
+  session: Session | null;
+}
+
+const NavbarActions = ({ session }: NavbarActionsProps) => {
 
 
   return (
