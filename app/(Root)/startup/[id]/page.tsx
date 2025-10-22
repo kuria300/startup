@@ -9,6 +9,7 @@ import markdownit from 'markdown-it'
 import { Skeleton } from '@/components/ui/skeleton';
 import View from '@/app/components/View';
 import StartupCard from '@/app/components/StartupCard';
+import { StartupPost } from '../../page';
 
 const md= markdownit()
 
@@ -69,7 +70,7 @@ const Page = async ({params}: {params: {id: string}}) => {
     <p className="text-[30px] font-semibold">Startup Posts</p>
 
     <ul className="mt-7 card_grid-sm">
-      {editorPosts.map((post: any, i: number) => (
+      {editorPosts.map((post: StartupPost, i: number) => (
         <StartupCard key={i} post={post} />
       ))}
     </ul>

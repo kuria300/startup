@@ -6,6 +6,17 @@ import { auth } from "@/auth";
 
 export const revalidate = 60;
 
+export type StartupPost = {
+  _createdAt: Date;
+  views: number;
+  author: { _id: number , name: string, image: string };
+  _id: number;
+  description: string;
+  image: string;
+  category: string;
+  title: string;
+};
+
 export default async function Home({searchParams} : {searchParams: Promise<{query?: string}>}) {
 
   const query = (await searchParams).query;
@@ -14,7 +25,7 @@ export default async function Home({searchParams} : {searchParams: Promise<{quer
 
   const session = await auth();
 
-  console.log(session?.id);
+  //console.log(session?.id);
   
   return (
     <>
@@ -35,7 +46,7 @@ export default async function Home({searchParams} : {searchParams: Promise<{quer
 
       <ul className="mt-6 card_grid">
         {posts?.length > 0 ?(
-           posts.map((startupCard: any)=>
+           posts.map((startupCard: StartupPost)=>
             <StartupCard key={startupCard._id} post={startupCard} />
         )
        ):(

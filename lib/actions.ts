@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { parseData } from "./utils";
 import { writeClient } from '@/sanity/lib/write-client';
 
+
 export async function createIdea(formData: FormData, pitch: string){
   const session = await auth()
 

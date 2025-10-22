@@ -2,6 +2,7 @@ import { client } from '@/sanity/lib/client'
 import { STARTUPS_BY_AUTHOR } from '@/sanity/lib/queries'
 import React from 'react'
 import StartupCard from "@/app/components/StartupCard";
+import { StartupPost } from '../(Root)/page';
 
 const Startups = async ({id}: {id:string}) => {
 
@@ -10,7 +11,7 @@ const Startups = async ({id}: {id:string}) => {
   return (
     <>
    {startups.length > 0 ? (
-     startups.map((startup: any) => {
+     startups.map((startup: StartupPost) => {
        return <StartupCard key={startup._id} post={startup} />;
     })
    ) : (

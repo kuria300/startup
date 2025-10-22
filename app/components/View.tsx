@@ -9,7 +9,7 @@ const View = async ({id}: {id: string}) => {
     const data = await client.withConfig({ useCdn: false }).fetch(STARTUP_VIEWS_QUERY, { id });
   const { views } = data ?? {}; 
 after(async ()=>{ await writeClient.patch(id).set({views: views+ 1}).commit()})
- function formatNum(view: number) : string{
+ function formatNum(views: number) : string{
      const count= views ?? 0;
 
      if(count === 1){

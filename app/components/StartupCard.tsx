@@ -2,21 +2,13 @@ import { formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { StartupPost } from "../(Root)/page";
 
 
- const StartupCard = ({post} : {post: {
-    _createdAt: Date;
-    views: number;
-    author: { _id: number , name: string, image: string};
-    _id: number;
-    description: string;
-    image: string;
-    category: string;
-    title: string;
-  }}) => {
+ const StartupCard = ({post} : {post: StartupPost}) => { //props object destructuring
 
 
-    const {_createdAt, views, author:{_id: authorId, name, image: imageId}, category, title, _id, description, image} = post
+    const {_createdAt, views, author:{_id: authorId, name, image: imageId}, category, title, _id, description, image} = post //post object destructure
 
   return (
     <li className='startup-card group'>

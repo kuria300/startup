@@ -4,12 +4,17 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useActionState, useState } from "react"
 import MDEditor from '@uiw/react-md-editor';
-import { Send } from "lucide-react";
 import { userSchema } from "@/lib/validation";
 import {z} from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { createIdea } from "@/lib/actions";
+
+type FormState = {
+  status: "INITIAL" | "SUCCESS" | "ERROR";
+  error: string | null;
+  fieldErrors: Record<string, string>;
+};
 
 
 const StartupForm = () => {
@@ -19,7 +24,7 @@ const StartupForm = () => {
     const { toast } = useToast();
     const router = useRouter();
      
-    const handleForm= async (prevState: any, formData: FormData )=>{
+    const handleForm= async (prevState: FormState, formData: FormData )=>{ //server action declared inline and managed by useActionstate even without 'use server'
        try{
         const formValues ={
             title: formData.get("title") as string,
@@ -31,8 +36,7 @@ const StartupForm = () => {
 
         await userSchema.parseAsync(formValues);
 
-       console.log(formValues)
-       const result= await createIdea( formData, pitch)
+       const result= await createIdea(formData, pitch)
        if(result.status == "SUCCESS") {
        toast({
         title:"Success",
@@ -47,13 +51,13 @@ const StartupForm = () => {
         if (error instanceof z.ZodError) {
           const fieldErr= error.flatten().fieldErrors;
 
-          // const errorMessages= Object.fromEntries(
-          //   Object.entries(fieldErr).map(([key, value]) => [key, value[0] || ''])
-          //   );
+           const errorMessages= Object.fromEntries(
+             Object.entries(fieldErr).map(([key, value]) => [key, value?.[0] || ''])
+            );
 
-            setErrors(fieldErr as unknown as Record<string, string>)
+            //setErrors(fieldErr as unknown as Record<string, string>) //it says its not the shape i want but pretend we move on
           
-            //setErrors(errorMessages);
+            setErrors(errorMessages);
 
             toast({
               title:"Error",
@@ -76,7 +80,7 @@ const StartupForm = () => {
        toast({
         title:"Error",
         description: "An error occured uexpectedly",
-        variant:"destructive",
+        variant:"destructive", //attention-grabbing toast
        })
 
        return {
@@ -86,7 +90,7 @@ const StartupForm = () => {
     };
        }
     }   
-const [state, formAction, isPending] = useActionState(handleForm, {
+const [, formAction, isPending] = useActionState(handleForm, {
   error: "",
   status: "INITIAL",
 });
