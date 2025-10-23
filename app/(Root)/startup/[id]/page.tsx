@@ -11,11 +11,16 @@ import View from '@/app/components/View';
 import StartupCard from '@/app/components/StartupCard';
 import { StartupPost } from '../../page';
 
+interface PageProps {
+  params: {
+    id: string
+  }
+}
 const md= markdownit()
 
 //export const experimental_ppr =true;//PPR in this page.tsx
 
-const Page = async ({params}: {params: {id: string}}) => {
+const Page = async ({ params }: PageProps) => {
     const { id }= params
 
     const post = await client.fetch(STARTUP_ID_QUERY, {id})
