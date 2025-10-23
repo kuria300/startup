@@ -15,9 +15,8 @@ const md= markdownit()
 
 //export const experimental_ppr =true;//PPR in this page.tsx
 
-const Page = async ({ params }: { params: { id: string } | Promise<{ id: string }>}) => {
-   const resolvedParams = await Promise.resolve(params)
-  const id = resolvedParams.id
+const Page = async ({ params }: { params: Promise<{ id: string }>}) => {
+   const {id} = await params
 
     const post = await client.fetch(STARTUP_ID_QUERY, {id})
 

@@ -4,7 +4,7 @@ import { BadgePlus, LogOut } from 'lucide-react';
 import { signIn, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import Image from 'next/image';
-import type { Session } from 'next-auth';
+import type { Session } from 'next-auth'; //Hey TypeScript, use NextAuth’s official blueprint to check that my session object is correct
 
 interface NavbarActionsProps {
   session: Session | null;
