@@ -8,7 +8,7 @@ const Navbar = async() => {
   return (
     <header className='px-5 py-4 text-black shadow-sm bg-white font-work-sans'>
       <nav className='flex justify-between items-center'>
-        <Link href='/'>
+        <Link href='/' className='font-bold text-3xl '>
           {/* <Image src='/logo.png' alt='logo' width={144} height={30}/> */}
             IdeaHub0
         </Link>
