@@ -1,5 +1,4 @@
 import { auth } from '@/auth'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import NavbarActions from '@/app/components/NavbarActions'
