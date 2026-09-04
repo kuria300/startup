@@ -24,7 +24,7 @@ const StartupForm = () => {
     const { toast } = useToast();
     const router = useRouter();
      
-    const handleForm= async (prevState: FormState, formData: FormData )=>{ //server action declared inline and managed by useActionstate even without 'use server'
+    const handleForm= async (prevState: FormState, formData: FormData )=>{
        try{
         const formValues ={
             title: formData.get("title") as string,
@@ -37,6 +37,11 @@ const StartupForm = () => {
         await userSchema.parseAsync(formValues);
 
        const result= await createIdea(formData, pitch)
+
+       if (result.status === "ERROR" && result.fieldErrors) {
+         setErrors(result.fieldErrors);
+       }
+
        if(result.status == "SUCCESS") {
        toast({
         title:"Success",
@@ -55,8 +60,6 @@ const StartupForm = () => {
              Object.entries(fieldErr).map(([key, value]) => [key, value?.[0] || ''])
             );
 
-            //setErrors(fieldErr as unknown as Record<string, string>) //it says its not the shape i want but pretend we move on
-          
             setErrors(errorMessages);
 
             toast({
@@ -70,17 +73,12 @@ const StartupForm = () => {
               error: "validation failed", 
               status: "ERROR",
           };
-          // const errorMessages: Record<string, string> = {};
-          // error.errors.forEach((err) => {
-          //    errorMessages[err.path[0]] = err.message;
-          // });
-          // setErrors(errorMessages);
        }
 
        toast({
         title:"Error",
         description: "An error occured uexpectedly",
-        variant:"destructive", //attention-grabbing toast
+        variant:"destructive",
        })
 
        return {
