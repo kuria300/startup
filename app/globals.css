@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@custom-variant dark (&:is(.dark *));
-@tailwind utilities;
+
 
 
 @layer utilities{

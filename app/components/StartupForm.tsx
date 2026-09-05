@@ -56,9 +56,9 @@ const StartupForm = () => {
         if (error instanceof z.ZodError) {
           const fieldErr= error.flatten().fieldErrors;
 
-           const errorMessages= Object.fromEntries(
-             Object.entries(fieldErr).map(([key, value]) => [key, value?.[0] || ''])
-            );
+           const errorMessages = Object.fromEntries(
+          Object.entries(fieldErr).map(([key, value]) => [key, (value as string[])?.[0] || ''])
+        );
 
             setErrors(errorMessages);
 
