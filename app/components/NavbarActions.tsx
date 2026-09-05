@@ -17,7 +17,7 @@ const NavbarActions = ({ session }: NavbarActionsProps) => {
     <div className='flex items-center gap-5'>
          {session && session?.user ?(
            <>
-             <Link href='/startup/create'>
+             <Link href='/startup/create' >
               <span className='max-sm:hidden'>Create</span>
               <BadgePlus className='sm:hidden size-6' />
              </Link>
@@ -42,7 +42,7 @@ const NavbarActions = ({ session }: NavbarActionsProps) => {
 </Link>
            </>
          ):(
-         <button onClick={()=>signIn('github')}>
+         <button onClick={()=>signIn('github')} className='bg-black text-white rounded-xl px-4 py-2 hover:bg-black/60'>
             <span>Login</span>
          </button>
          )}

@@ -34,6 +34,9 @@ const config: Config = {
             fontFamily: {
                 'work-sans': ['var(--font-work-sans)', 'sans-serif'],
             },
+             backgroundImage: {
+            'bg-pattern': "url('/creator.avif')"
+              },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",

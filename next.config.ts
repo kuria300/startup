@@ -12,7 +12,8 @@ const nextConfig: NextConfig = {
   ]
  },
 
- devIndicators: false
+ devIndicators: false,
+   allowedDevOrigins: ['192.168.0.111'],
 //  experimental: {
 //     ppr:"incremental",
 //       },
@@ -28,7 +29,7 @@ export default withSentryConfig(withSentryConfig(nextConfig, {
 // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
 org: "unistudent-t0",
-project: "javascript-nextjs",
+project: "startup0",
 
 // Only print logs for uploading source maps in CI
 silent: !process.env.CI,
@@ -58,7 +59,7 @@ automaticVercelMonitors: true,
 // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
 org: "unistudent-t0",
-project: "javascript-nextjs",
+project: "startup0",
 
 // Only print logs for uploading source maps in CI
 silent: !process.env.CI,

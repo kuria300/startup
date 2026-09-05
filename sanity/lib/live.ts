@@ -10,5 +10,6 @@ export const { sanityFetch, SanityLive } = defineLive({
     apiVersion: 'vX',
     token: process.env.NEXT_SERVER_TOKEN,
   }),
-  browserToken:process.env.NEXT_BROWSER_TOKEN
+  browserToken:process.env.NEXT_BROWSER_TOKEN,
+  serverToken: process.env.NEXT_SERVER_TOKEN  
 });

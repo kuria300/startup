@@ -17,10 +17,13 @@ const md= markdownit()
 
 const Page = async ({ params }: { params: Promise<{ id: string }>}) => {
    const {id} = await params
+   console.log("Fetching startup with id:", id)
 
     const post = await client.fetch(STARTUP_ID_QUERY, {id})
+    console.log("Post result:", post)
 
-    const {select:editorPosts } = await client.fetch(PLAYLIST_QUERY, {slug: 'startup-picks'} )
+    const playlistData = await client.fetch(PLAYLIST_QUERY, {slug: 'creator-lift'})
+const editorPosts = playlistData?.select ?? []
 
     if(!post) return notFound();
     const parsedContent= md.render(post?.pitch|| "")

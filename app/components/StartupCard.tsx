@@ -1,23 +1,49 @@
+"use client";
+
 import { formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "motion/react";
 import { StartupPost } from "../(Root)/page";
 
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+} as const;
 
- const StartupCard = ({post} : {post: StartupPost}) => { //props object destructuring
+const StartupCard = ({ post }: { post: StartupPost }) => {
+  //props object destructuring
 
+  const {
+    _createdAt,
+    views,
+    author,
+    category,
+    title,
+    _id,
+    description,
+    image,
+  } = post; //post object destructure
 
-    const {_createdAt, views, author:{_id: authorId, name, image: imageId}, category, title, _id, description, image} = post //post object destructure
+const authorId= author?._id
+const name = author?.name
+const imageId = author?.image
 
   return (
-    <li className='startup-card group'>
-      <div className='flex justify-between'>
-        <p className='startup-card_date ml-4'>
-          {formatDate(_createdAt)}
-        </p>
+    <motion.li
+      variants={item}
+      whileHover={{ y: -6 }}
+      className="startup-card group"
+    >
+      <div className="flex justify-between">
+        <p className="startup-card_date ml-4">{formatDate(_createdAt)}</p>
         <div className="flex gap-1.5">
-          <EyeIcon className="size-6 text-pink-400"/>
+          <EyeIcon className="size-6 text-pink-400" />
           <span className="text-[15px] font-medium">{views}</span>
         </div>
       </div>
@@ -27,28 +53,34 @@ import { StartupPost } from "../(Root)/page";
             <p className="text-[16px] font-medium line-clamp-1"> {name}</p>
           </Link>
           <Link href={`/startup/${_id}`}>
-             <h3 className="text-[26px] font-bold line-clamp-1">{title}</h3>
+            <h3 className="text-[26px] font-bold line-clamp-1">{title}</h3>
           </Link>
         </div>
         <Link href={`/user/${authorId}`}>
-          <Image src={imageId} alt={name} width={48} height={48} className="rounded-full"/>
+          <Image
+            src={imageId}
+            alt={name}
+            width={48}
+            height={48}
+            className="rounded-full"
+          />
         </Link>
       </div>
       <Link href={`/startup/${_id}`}>
-       <p className="startup-card_desc">{description}</p>
+        <p className="startup-card_desc">{description}</p>
 
-       <img src={image} alt="logo" className="startup-card_img"/>
+        <img src={image} alt="logo" className="startup-card_img" />
       </Link>
       <div className="flex justify-between gap-3 mt-5">
-         <Link href={`/?query=${category?.toLowerCase()}`}>
-           <p className="text-[16px] font-medium">{category}</p>
-         </Link> 
-         <button className="startup-card_btn">
+        <Link href={`/?query=${category?.toLowerCase()}`}>
+          <p className="text-[16px] font-medium">{category}</p>
+        </Link>
+        <button className="startup-card_btn">
           <Link href={`/startup/${_id}`}>Details</Link>
-         </button>
+        </button>
       </div>
-    </li>
-  )
-}
+    </motion.li>
+  );
+};
 
-export default StartupCard
+export default StartupCard;

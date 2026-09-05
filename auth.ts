@@ -7,9 +7,10 @@ import { writeClient } from "./sanity/lib/write-client"
 //export const dynamic = 'force-dynamic';
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost:true,
  providers: [
     GitHub({
-      issuer: "https://github.com/login/oauth", // 👈 added here
+      issuer: "https://github.com/login/oauth", 
     }),
   ],
   callbacks: { 

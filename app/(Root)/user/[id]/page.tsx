@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation'
 import React, { Suspense } from 'react'
 
 
-export const experimental_ppr= true;
+//export const experimental_ppr= true;
 
 const page = async ({params}: {params: Promise<{id: string}>}) => {
  const id = (await params).id
